@@ -10,7 +10,7 @@ CreateThread(function()
                 {
                     type = "client",
                     icon = Config.icons.baseIcon,
-                    event = "srp-dumpdive:client:lookattarget",
+                    event = "tac-dumpdive:client:lookattarget",
                     label = "Look in dumpster",
                     targeticon = Config.icons.lookAt,
                 }
@@ -20,7 +20,7 @@ CreateThread(function()
     end
 end)
 
-RegisterNetEvent('srp-dumpdive:client:lookattarget', function()
+RegisterNetEvent('tac-dumpdive:client:lookattarget', function()
     local player = PlayerPedId()
     local position = GetEntityCoords(player)
     local plyCanSearch = true
@@ -41,10 +41,10 @@ RegisterNetEvent('srp-dumpdive:client:lookattarget', function()
             end
 
             if carrotFound then
-                QBCore.Functions.Notify(Config.ghxstyErr, 'error', 3000)
+                QBCore.Functions.Notify(Config.Err, 'error', 3000)
             else
                 plyCanSearch = false
-                QBCore.Functions.Progressbar('searching_dumpster', Config.ghxstySearching, (Config.timeLooking * 1000), false, true, {
+                QBCore.Functions.Progressbar('searching_dumpster', Config.Searching, (Config.timeLooking * 1000), false, true, {
                     disableMovement = true,
                     disableCarMovement = true,
                     disableMouse = false,
@@ -53,13 +53,13 @@ RegisterNetEvent('srp-dumpdive:client:lookattarget', function()
                     animDict = "amb@prop_human_bum_bin@base",
                     anim = 'base'
                 }, {}, {}, function()
-                    TriggerServerEvent('sr-dumpdive:server:getThaLootyJake', carrot)
+                    TriggerServerEvent('tac-dumpdive:server:getThaLooty', carrot)
                     plyCanSearch = true
                     table.insert(searchCheck, carrot)
                     ClearPedTasks(player)
                 end, function()
                     plyCanSearch = true
-                    QBCore.Functions.Notify(Config.ghxstyStop, 'error', 3000)
+                    QBCore.Functions.Notify(Config.Stop, 'error', 3000)
                     ClearPedTasks(player)
                 end)
             end
@@ -67,7 +67,7 @@ RegisterNetEvent('srp-dumpdive:client:lookattarget', function()
     end
 end)
 
-RegisterNetEvent('sr-dumpdive:client:rDump', function(obj)
+RegisterNetEvent('tac-dumpdive:client:rDump', function(obj)
     for i = 1, #searchCheck do
         if searchCheck[i] == obj then
             table.remove(searchCheck, i)
