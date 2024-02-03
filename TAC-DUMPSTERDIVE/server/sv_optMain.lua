@@ -1,6 +1,6 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
-RegisterNetEvent('sr-dumpdive:server:getThaLootyJake', function(carrot)
+RegisterNetEvent('tac-dumpdive:server:getThaLooty', function(carrot)
   local src = source
   local ply = QBCore.Functions.GetPlayer(src)
 
@@ -10,13 +10,11 @@ RegisterNetEvent('sr-dumpdive:server:getThaLootyJake', function(carrot)
   end
 
   local getItem = getRandomItemFromTable(Config.itemTable)
-  print("Getting tha loot", json.encode(getItem)) -- remember to take this  out
   ply.Functions.AddItem(getItem.item, getItem.amount)
   TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[getItem.item], 'add')
 
   if Config.addonItemsActive then
     local addonGetItem = getRandomItemFromTable(Config.addonItemsTable)
-    print("Getting tha loot", json.encode(addonGetItem)) -- remember to take this  out
     ply.Functions.AddItem(addonGetItem.item, addonGetItem.amount)
     TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[addonGetItem.item], 'add')
   end
@@ -32,7 +30,7 @@ function carrotTimer(id, obj)
       Wait(1000)
       peelingCarrot = peelingCarrot - 1000
       if peelingCarrot == 0 then
-        TriggerClientEvent('sr-dumpdive:client:rDump', id, obj)
+        TriggerClientEvent('tac-dumpdive:client:rDump', id, obj)
       end
     end
   end)
