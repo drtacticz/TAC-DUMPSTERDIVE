@@ -2,7 +2,7 @@ fx_version 'cerulean'
 game 'gta5'
 
 
-description 'srp-dumpster dive'
+description 'tac-dumpster dive'
 version '1.0.0'
 
 client_scripts {
